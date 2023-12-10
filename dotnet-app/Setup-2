@@ -1,0 +1,60 @@
+# Demo - 1
+## Setup '.Net-SDK' and a Jenkins Job
+
+# Step - 2
+
+Check and install .NET SDK Support plugin from available tab of manage Jenkins
+
+add a command to build the .Net Project
+Add build step:
+
+```
+dotnet build ./dotnet-app/src/Pi.Web/Pi.Web.csproj
+```
+
+--> Build and check
+
+Add smoke test:
+
+```
+dotnet ./dotnet-app/src/Pi.Web/bin/Debug/netcoreapp3.1/Pi.Web.dll
+```
+
+--> Build again
+
+## Run tests
+
+Unit tests use NUnit which can output MSTest `.trx` format files.
+
+Add unit test:
+
+```
+dotnet test --logger "trx;LogFileName=Pi.Math.trx" ./dotnet-app/src/Pi.Math.Tests/Pi.Math.Tests.csproj
+
+dotnet test --logger "trx;LogFileName=Pi.Runtime.trx" ./dotnet-app/src/Pi.Runtime.Tests/Pi.Runtime.Tests.csproj
+```
+
+--> Build and check console output
+
+Browse workspace for `.trx` files; now we need an 'MSTest' plugin to publish the test reports
+
+- search `trx`
+- check `MSTest` plugin details
+
+Back to Jenkins - _Manage Jenkins_ ... _Manage Plugins_
+
+- from `Available` tab
+- install MSTest
+
+In Jenkins job, add post-build step for MSTest
+
+- default options
+
+> Build
+
+- test results per build
+- drill down into tests
+
+> Build again & refresh job page
+
+- with multiple builds trend report at job level

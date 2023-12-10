@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+    environment {
+        RELEASE='22.04'
+    }
+    stages {
+        stage('Build') {
+            agent any
+            environment {
+                SUB_VERSION='002'
+            }
+            steps {
+                echo "Building release ${RELEASE} with sub version ${SUB_VERSION}..."
+            }
+        }
+        stage('Test') {
+            steps {
+                echo "Testing release ${RELEASE}..."
+            }
+        }
+        stage('Deploy') {
+            input {
+                message 'Deploy?'
+                ok 'Do it!'
+                parameters {
+                    string(name: 'DEPLOY_ENVIRONMENT', defaultValue: 'PROD', description: 'Target deployment environment')
+                }
+            }
+            steps {
+                echo "Deploying release ${RELEASE} to environment ${DEPLOY_ENVIRONMENT}"
+            }
+        }        
+    }
+    post{
+        always {
+             echo 'Prints this line whether deploy happened or not, success or failure'
+        }
+    }
+}

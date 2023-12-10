@@ -1,0 +1,36 @@
+# Demo - 1
+## Setup '.Net-SDK' and a Jenkins Job
+
+sudo apt-get update
+sudo apt-get install -y dotnet-sdk-7.0
+dotnet --version
+
+export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT="true" \
+    PATH="${PATH}:/root/.dotnet"
+
+# Step - 1
+## Set up the project & clone the repo
+
+In Jenkins - _Manage Jenkins_ ... _Manage Plugins_
+
+- Select `Available` tab and search 'GitHub' plugin and install
+
+Create new freestyle job:
+
+- Git SCM
+- repo url `https://github.com/AneesRavidKhan/Multi-Proj`
+- branch spec `\*master`
+- advanced clone - shallow, depth = 1
+- clean before checkout
+
+Build triggers:
+
+- poll scm
+- schedule `H/5 * * * *`
+
+Build steps:
+
+- shell `ls`
+
+--> Build now and verify repo download
+

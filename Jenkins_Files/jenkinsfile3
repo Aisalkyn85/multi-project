@@ -1,0 +1,58 @@
+pipeline {
+    agent any
+    environment {
+        RELEASE='22.04'
+    }
+    stages {
+        stage('Build') {
+            environment {
+                SUB_VERSION='003'
+            }
+            parallel {
+                stage('linux-arm64') {
+                    agent any
+                    steps {
+                        echo "Building release ${RELEASE} for ${STAGE_NAME} with sub version ${SUB_VERSION}..."
+                        sh 'sleep 10'
+                    }
+                }
+                stage('linux-amd64') {
+                    agent any
+                    steps {
+                        echo "Building release ${RELEASE} for ${STAGE_NAME} with sub version ${SUB_VERSION}..."
+                        sh 'sleep 20'
+                    }
+                }
+                stage('windows-amd64') {
+                    agent any
+                    steps {
+                        echo "Building release ${RELEASE} for ${STAGE_NAME} with sub version ${SUB_VERSION}..."
+                        sh 'sleep 30'
+                    }
+                }
+            }
+        }
+        stage('Test') {
+            steps {
+                echo "Testing release ${RELEASE}..."
+            }
+        }
+        stage('Deploy') {
+            input {
+                message 'Deploy?'
+                ok 'Do it!'
+                parameters {
+                    string(name: 'DEPLOY_ENVIRONMENT', defaultValue: 'PROD', description: 'Target deployment environment')
+                }
+            }
+            steps {
+                echo "Deploying release ${RELEASE} to environment ${DEPLOY_ENVIRONMENT}"
+            }
+        }        
+    }
+    post{
+        always {
+             echo 'Prints this line whether deploy happened or not, success or failure'
+        }
+    }
+}

@@ -1,0 +1,26 @@
+pipeline {
+    
+    agent any
+    environment {
+        RELEASE='22.04'
+    }
+
+    stages {
+
+        stage('Build') {
+            agent any
+            environment {
+                SUB_VERSION='001'
+            }
+            steps {
+                echo "Building release ${RELEASE} with sub version ${SUB_VERSION}..."
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                echo "Testing. I can see release ${RELEASE}, but not sub version ${SUB_VERSION}"
+            }
+        }
+    }
+}

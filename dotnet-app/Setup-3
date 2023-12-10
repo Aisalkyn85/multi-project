@@ -1,0 +1,29 @@
+# Demo 2
+
+## Build Docker image and publish to Docker Hub
+
+search for `Docker Hub` in [plugins](https://plugins.jenkins.io/).
+
+- "Docker" is most popular plugin but has lots of dependencies and features which we don't need so will got with a simple 'CloudBees Docker Build & Publish' plugin
+
+In Jenkins - _Manage Jenkins_ ... _Manage Plugins_
+
+- from `Available` tab install CloudBees Docker Build & Publish
+
+In job, add _build and publish_ step
+
+- repo: `your docker hub repo`
+- registry credentials - add new username/password
+- use Docker Hub username and [authentication token](https://hub.docker.com/settings/security)
+- advanced - Dockerfile path 
+
+-- Build now
+
+- add build environment, hub credentials:
+  - `DOCKER_HUB_USER`
+  - `DOCKER_HUB_PASSWORD`
+- add build step, before build & push
+
+```
+docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
+```

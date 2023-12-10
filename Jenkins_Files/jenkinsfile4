@@ -1,0 +1,45 @@
+pipeline {
+    agent {
+        docker {
+            image 'maven:latest'
+            args '-u root'
+        }
+    }
+    
+    environment {
+      VERSION = '0.1.0'
+      RELEASE_VERSION = 'R.2'
+    }
+
+    stages {
+      stage('Audit tools') {
+        steps {
+          sh '''
+              java -version
+              mvn -version
+          '''
+          sh 'printenv'
+          sh 'ls -l $WORKSPACE'
+        }
+      }
+
+      stage('Unit Test') {
+        steps {
+          dir('./java-web-app') {
+            sh '''
+              echo "Executing Unit Tests..."
+              mvn test
+          '''
+          }
+        }
+      }
+
+      stage('Build') {
+        steps {
+          echo "Building version: ${VERSION} with suffix: ${RELEASE_VERSION}"
+          echo 'Mention your Application Build Code here!!!'
+          sh 'mvn -f java-web-app/pom.xml clean package'
+        }
+      }
+    }
+}

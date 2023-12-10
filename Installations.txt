@@ -1,0 +1,41 @@
+## Setup '.Net-SDK' in Ubuntu
+
+    sudo apt update
+    sudo apt install -y dotnet-sdk-7.0
+    dotnet --version
+
+    export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT="true" \
+        PATH="${PATH}:/root/.dotnet"
+
+## Setup 'Docker in Ubuntu'
+    sudo apt update
+    sudo apt install curl
+    curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --channel 7.0
+    curl -fsSL https://get.docker.com -o get-docker.sh
+    sudo sh get-docker.sh
+    sudo docker --version
+
+    sudo systemctl start docker
+    sudo systemctl status docker
+
+    // Use this command if you want to start docker at system startup
+    sudo systemctl enable docker
+
+    sudo apt update
+    // you can add user to the docker group
+    sudo usermod -aG docker khan
+    sudo systemctl restart docker
+
+## Installing 'Maven' in Ubuntu
+    cd /opt
+    wget https://dlcdn.apache.org/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.tar.gz
+    tar -zxvf apache-maven-3.8.8-bin.tar.gz
+
+    // configure .bashrc file
+    export M2_HOME="~/opt/apache-maven-3.8.8"
+    export PATH="$M2_HOME/bin:$PATH"
+
+    // Check Maven version
+    mvn -v
+
+    
