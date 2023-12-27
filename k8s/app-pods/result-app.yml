@@ -1,0 +1,14 @@
+apiVersion: v1 
+kind: Pod 
+metadata: 
+  name: result-app
+  labels:
+    name: result-app
+    app: voting-app 
+spec: 
+  containers: 
+   - name: result-app 
+     image: aneesravidkhan/votingapp_result:v1.0
+     imagePullPolicy: IfNotPresent
+     ports: 
+       - containerPort: 80 
