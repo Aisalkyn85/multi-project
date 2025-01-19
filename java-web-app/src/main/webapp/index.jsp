@@ -62,7 +62,7 @@
 <body>
 
 <header>
-    <h1>Aisalkyn Aidarova</h1>
+    <h1>Aisalkyn Aidarova aka AJ</h1>
     <p>Web Developer | Designer | Freelancer | QA Engineer | DevOps Enthu</p>
 </header>
 
