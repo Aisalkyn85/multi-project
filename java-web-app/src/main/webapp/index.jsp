@@ -63,7 +63,7 @@
 
 <header>
     <h1>Aisalkyn Aidarova</h1>
-    <p>Web Developer | Designer | Freelancer</p>
+    <p>Web Developer | Designer | Freelancer | QA Engineer | DevOps Enthu</p>
 </header>
 
 <div class="container">
