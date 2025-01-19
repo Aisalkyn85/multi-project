@@ -73,7 +73,7 @@
     </section>
 
     <section class="projects">
-        <h2>Projects</h2>
+        <h2>Multi-Projects</h2>
         <img src="https://via.placeholder.com/800x400" alt="Project Thumbnail">
         <h3>Project 1</h3>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ultricies elit et urna pharetra.</p>
